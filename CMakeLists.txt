@@ -43,6 +43,7 @@ option(ETHASHCUDA "Build with CUDA mining" ON)
 option(ETHASHCPU "Build with CPU mining (only for development)" OFF)
 option(APICORE "Build with API Server support" ON)
 option(DEVBUILD "Log developer metrics" OFF)
+option(ETCHASH "Build as ethereum classic miner" OFF)
 
 # propagates CMake configuration options to the compiler
 function(configureProject)
@@ -80,6 +81,7 @@ message("-- ETHASHCUDA       Build CUDA components                        ${ETHA
 message("-- ETHASHCPU        Build CPU components (only for development)  ${ETHASHCPU}")
 message("-- APICORE          Build API Server components                  ${APICORE}")
 message("-- DEVBUILD         Build with dev logging                       ${DEVBUILD}")
+message("-- ETCHASH          Build as ethereum classic miner              ${ETCHASH}")
 message("----------------------------------------------------------------------------")
 message("")
 
@@ -90,12 +92,17 @@ endif()
 
 cable_add_buildinfo_library(PROJECT_NAME ${PROJECT_NAME})
 
+if (NOT ETCHASH)
+    include_directories(SYSTEM ethash/include/)
+    add_subdirectory(ethash)
+else ()
+    include_directories(SYSTEM etchash/include/)
+    add_subdirectory(etchash)
+endif ()
 add_subdirectory(libdev)
 add_subdirectory(libeth)
 add_subdirectory(libhwmon)
 add_subdirectory(libpool)
-add_subdirectory(ethash)
-
 if (ETHASHCL)
     add_subdirectory(libcl)
 endif ()
