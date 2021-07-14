@@ -14,6 +14,7 @@
 #include <libdev/Worker.h>
 
 #include <ethash/ethash.hpp>
+#include <ethash/global_context.hpp>
 
 namespace dev {
 namespace eth {

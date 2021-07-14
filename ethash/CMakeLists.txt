@@ -16,7 +16,7 @@ HunterGate(
 )
 
 project(ethash)
-set(PROJECT_VERSION 0.6.0)
+set(PROJECT_VERSION 0.7.0)
 
 if(CABLE_COMPILER_GNULIKE)
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Og")
@@ -32,4 +32,3 @@ elseif(MSVC AND CMAKE_SIZEOF_VOID_P EQUAL 4)
 endif()
 
 add_subdirectory(lib)
-
